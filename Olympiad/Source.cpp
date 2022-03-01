@@ -16,43 +16,43 @@ using namespace std;
 // By VladOS (IAmProgrammist)
 
 
-// Рабочее пространство
+// Р Р°Р±РѕС‡РµРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ
 const string WORK_FOLDER_TASK_1 = "C:\\Users\\vladi\\Downloads\\task_1";
 
-// Посимвольная проверка алфавита
+// РџРѕСЃРёРјРІРѕР»СЊРЅР°СЏ РїСЂРѕРІРµСЂРєР° Р°Р»С„Р°РІРёС‚Р°
 const bool REQUIRED_ALPHABET_CHECK = false;
 
-// Проверка работы алгоритма на вводе из строки консоли (ст. файл)
+// РџСЂРѕРІРµСЂРєР° СЂР°Р±РѕС‚С‹ Р°Р»РіРѕСЂРёС‚РјР° РЅР° РІРІРѕРґРµ РёР· СЃС‚СЂРѕРєРё РєРѕРЅСЃРѕР»Рё (СЃС‚. С„Р°Р№Р»)
 const bool REQUIRED_MANUAL_INPUT_QUERY = false;
 
-// Есть возможность создания файлов для Gephi
+// Р•СЃС‚СЊ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ СЃРѕР·РґР°РЅРёСЏ С„Р°Р№Р»РѕРІ РґР»СЏ Gephi
 const bool REQUIERED_GEPHI_OUTPUT = false;
 
-// Проверка слов из файла
+// РџСЂРѕРІРµСЂРєР° СЃР»РѕРІ РёР· С„Р°Р№Р»Р°
 const bool REQUIERED_FILE_INPUT_QUERY = true;
 
-// Сравнивает работу двух алгоритмов и выводи ошибку, если что-то не так
+// РЎСЂР°РІРЅРёРІР°РµС‚ СЂР°Р±РѕС‚Сѓ РґРІСѓС… Р°Р»РіРѕСЂРёС‚РјРѕРІ Рё РІС‹РІРѕРґРё РѕС€РёР±РєСѓ, РµСЃР»Рё С‡С‚Рѕ-С‚Рѕ РЅРµ С‚Р°Рє
 const bool REQUIERED_ALGO_CHECK = false;
 
-// Путь до словаря
+// РџСѓС‚СЊ РґРѕ СЃР»РѕРІР°СЂСЏ
 const string PATH_DICT_TASK1 = WORK_FOLDER_TASK_1 + "\\dict.txt";
 
-// Путь до запросов
+// РџСѓС‚СЊ РґРѕ Р·Р°РїСЂРѕСЃРѕРІ
 const string PATH_QUERIES_TASK1 = WORK_FOLDER_TASK_1 + "\\queries.txt";
 
-// Путь до ответов
+// РџСѓС‚СЊ РґРѕ РѕС‚РІРµС‚РѕРІ
 const string PATH_ANSWER_TASK1 = WORK_FOLDER_TASK_1 + "\\queriesans.txt";
 
-// Путь до вывода Gephi (вершины)
+// РџСѓС‚СЊ РґРѕ РІС‹РІРѕРґР° Gephi (РІРµСЂС€РёРЅС‹)
 const string PATH_GEPHI_NODES_TASK1 = WORK_FOLDER_TASK_1 + "\\nodes.csv";
 
-// Путь до вывода Gephi (рёбра)
+// РџСѓС‚СЊ РґРѕ РІС‹РІРѕРґР° Gephi (СЂС‘Р±СЂР°)
 const string PATH_GEPHI_LINKS_TASK1 = WORK_FOLDER_TASK_1 + "\\links.csv";
 
-//Глубина слов для Gephi
+//Р“Р»СѓР±РёРЅР° СЃР»РѕРІ РґР»СЏ Gephi
 const int GEPHI_MAX_WORD_LENGTH = 99;
 
-// id для вывода в файл для Gephi
+// id РґР»СЏ РІС‹РІРѕРґР° РІ С„Р°Р№Р» РґР»СЏ Gephi
 long long idCounterCharacters = 0;
 
 
@@ -200,7 +200,7 @@ void writefile(const character* charr, const int MAX_WORD_LENGTH, int currentlen
 	}
 }
 
-//Алгоритм возвращает все возможные слова
+//РђР»РіРѕСЂРёС‚Рј РІРѕР·РІСЂР°С‰Р°РµС‚ РІСЃРµ РІРѕР·РјРѕР¶РЅС‹Рµ СЃР»РѕРІР°
 pair<int, set<string*>> findWord(const character* currentChar, string currentWord, int failureCount) {
 	if (currentWord.size() == 0 && currentChar->finalWord != nullptr && *currentChar->finalWord != "The Root") {
 		set<string*> answer;
@@ -230,7 +230,7 @@ pair<int, set<string*>> findWord(const character* currentChar, string currentWor
 	}
 	if (failureCount != 2) {
 		for (set<character*>::iterator i = currentChar->linkedCharacters.begin(); i != currentChar->linkedCharacters.end(); i++) {
-			// Добавление символа перед (по сути пробрасывание того же слова):
+			// Р”РѕР±Р°РІР»РµРЅРёРµ СЃРёРјРІРѕР»Р° РїРµСЂРµРґ (РїРѕ СЃСѓС‚Рё РїСЂРѕР±СЂР°СЃС‹РІР°РЅРёРµ С‚РѕРіРѕ Р¶Рµ СЃР»РѕРІР°):
 			pair<int, set<string*>> tmpAns = findWord((*i), currentWord, failureCount + 1);
 			if (found.first == tmpAns.first) {
 				found.second.insert(tmpAns.second.begin(), tmpAns.second.end());
@@ -238,7 +238,7 @@ pair<int, set<string*>> findWord(const character* currentChar, string currentWor
 			else if (found.first > tmpAns.first) {
 				found = tmpAns;
 			}
-			// Замена символа:
+			// Р—Р°РјРµРЅР° СЃРёРјРІРѕР»Р°:
 			if (currentWord.size() >= 1) {
 				tmpAns = findWord((*i), currentWord.substr(1), failureCount + 1);
 				if (found.first == tmpAns.first) {
@@ -249,7 +249,7 @@ pair<int, set<string*>> findWord(const character* currentChar, string currentWor
 				}
 			}
 		}
-		// Удаление следующего символа (выглядит плохо, но должно сработать):
+		// РЈРґР°Р»РµРЅРёРµ СЃР»РµРґСѓСЋС‰РµРіРѕ СЃРёРјРІРѕР»Р° (РІС‹РіР»СЏРґРёС‚ РїР»РѕС…Рѕ, РЅРѕ РґРѕР»Р¶РЅРѕ СЃСЂР°Р±РѕС‚Р°С‚СЊ):
 		if (currentWord.size() >= 1) {
 			pair<int, set<string*>> tmpAns = findWord(currentChar, currentWord.substr(1), failureCount + 1);
 			if (found.first == tmpAns.first) {
@@ -259,7 +259,7 @@ pair<int, set<string*>> findWord(const character* currentChar, string currentWor
 				found = tmpAns;
 			}
 		}
-		// Меняем символы местами (эм хз лол):
+		// РњРµРЅСЏРµРј СЃРёРјРІРѕР»С‹ РјРµСЃС‚Р°РјРё (СЌРј С…Р· Р»РѕР»):
 		if (currentWord.size() >= 2) {
 			swap(currentWord[0], currentWord[1]);
 			pair<int, set<string*>> tmpAns = findWord(currentChar, currentWord, failureCount + 1);
@@ -274,7 +274,7 @@ pair<int, set<string*>> findWord(const character* currentChar, string currentWor
 	return found;
 }
 
-//Алгоритм возвращает исправления
+//РђР»РіРѕСЂРёС‚Рј РІРѕР·РІСЂР°С‰Р°РµС‚ РёСЃРїСЂР°РІР»РµРЅРёСЏ
 pair<int, vector<string>> findWord(const character* currentChar, string originalWord, int at, int failureCount) {
 	if (originalWord.size() - at <= 0 && currentChar->finalWord != nullptr && !originalWord.empty()) {
 		vector<string> ans;
@@ -312,7 +312,7 @@ pair<int, vector<string>> findWord(const character* currentChar, string original
 		}
 		originalWord = oldoriginalword;
 
-		//Отдельный случай, swap и insert.
+		//РћС‚РґРµР»СЊРЅС‹Р№ СЃР»СѓС‡Р°Р№, swap Рё insert.
 		string changedWord = originalWord;
 		vector<string> changes;
 
